@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASCAL MEDICO HOUSE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        header {
+            background-color: #001f3f;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff4136;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #ff725c;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PASCAL MEDICO HOUSE</h1>
+        <p>NEPALGUNJ BANKE NURSING HOME OPPOSITE</p>
+    </header>
+    <div class="container">
+        <h2>Check Symptoms and Get Diagnosis</h2>
+        <form id="symptomForm">
+            <label for="symptoms">Enter Symptoms:</label>
+            <textarea id="symptoms" rows="4" placeholder="e.g., fever, cough, headache"></textarea>
+            <button type="button" onclick="diagnose()">Diagnose</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function diagnose() {
+            const symptoms = document.getElementById('symptoms').value.toLowerCase().split(',').map(s => s.trim());
+            const diagnosis = {
+                'fever, cough, headache': {
+                    disease: 'Flu',
+                    medicine: 'Paracetamol, Ibuprofen'
+                },
+                'fever, rash, joint pain': {
+                    disease: 'Dengue',
+                    medicine: 'Acetaminophen, fluids'
+                },
+                'cough, fever, shortness of breath': {
+                    disease: 'COVID-19',
+                    medicine: 'Rest, fluids, paracetamol'
+                },
+                'abdominal pain, nausea, vomiting': {
+                    disease: 'Gastroenteritis',
+                    medicine: 'Oral rehydration salts, antiemetics'
+                }
+            };
+            
+            const symptomKey = symptoms.join(', ');
+            const resultDiv = document.getElementById('result');
+            
+            if (diagnosis[symptomKey]) {
+                resultDiv.innerHTML = `<h3>Diagnosis: ${diagnosis[symptomKey].disease}</h3>
+                                       <p>Recommended Medicines: ${diagnosis[symptomKey].medicine}</p>`;
+            } else {
+                resultDiv.innerHTML = '<p>No matching diagnosis found. Please consult a healthcare professional.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
